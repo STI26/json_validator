@@ -11,7 +11,7 @@ def get_type(t):
         'object': (dict,),
         'array': (list,),
         'boolean': (bool,),
-        'null': (None,)
+        'null': (type(None),)
     }
     if isinstance(t, list):
         return functools.reduce(lambda a, b: a+b, [json_types[i] for i in t])

@@ -32,20 +32,22 @@ def main():
 
 def check_events(event_paths):
     f = open('README.txt', 'w')
-    count = 0
+    fail_count = 0
     for name, path in event_paths.items():
         obj = get_json(path)
         message = test_event(obj)
         if not message.get("result"):
-            count += 1
+            fail_count += 1
             f.write(f'Имя файла: {name}.json\n')
             f.write(f'Результат проверки: {message.get("result")}\n')
             f.write(f'Схема: {message.get("schema")}\n')
+            p_count = 0
             for problem in message.get("problems"):
-                f.write(f'Проблема: {problem.get("problem")}\n')
-                f.write(f'Решение: {problem.get("resolve")}\n\n')
+                p_count += 1
+                f.write(f'  Проблема #{p_count}: {problem.get("problem")}\n')
+                f.write(f'  Решение #{p_count}: {problem.get("resolve")}\n\n')
 
-    f.write(f'Результат: в {count} из {len(event_paths)} файлов найдены ошибки.\n\n')
+    f.write(f'Результат: в {fail_count} из {len(event_paths)} файлов найдены ошибки.\n\n')
     f.close()
 
 
@@ -112,11 +114,7 @@ def check_fields(target, schema):
 
     obj_type = schema.get('type')
     # Check type
-    if get_type(obj_type) is None:
-        is_correct_type = target is None
-    else:
-        is_correct_type = isinstance(target, get_type(obj_type))
-
+    is_correct_type = isinstance(target, get_type(obj_type))
     if not is_correct_type:
         return {'correct_type': obj_type, 'current_type': type(target)}
 
