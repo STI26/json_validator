@@ -14,9 +14,9 @@ Where:
 - s_subdir: include all schema subdirectories.(default: false)
 - field_name: field name in a JSON file with schema file name.(default: None)
 
-* if the schema is a directory you should specify `field_name`
+\* if the schema is a directory you should specify `field_name`
 
-The result of the check is saved in the file ``report.html``.
+_**The result of the check is saved in the file ``report.html``.**_
 
 ## Example
 
