@@ -23,8 +23,7 @@ The result of the check is saved in the file ``report.html``.
 ```bash
 python3 json_validator.py 'task/json' 'task/schema' true false 'event'
 ```
-Report:
-+++++
+### Report:
 
 <p align="center">
   <img width="100%" src="example.png" title="report">
